@@ -36,12 +36,10 @@ io.on('connection', (socket) => {
     username: socket.username,
   });
 
-  socket.on('sendPrivateMessage', ({to, from, content}) => {
-    console.log('from',from, 'to----', to);
-    socket.to(to).emit("receive-private-message", {
+  socket.on('private message', ({to, content}) => {
+    socket.to(to).emit("private message", {
       content,
-      from,
-      to,
+      from: socket.id,
     });
   })
 
